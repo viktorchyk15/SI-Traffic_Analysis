@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import folium
 
-# ======================= Data Processing =======================
+# Data Processing
 def clean_number(value):
     """Remove commas from a string and convert it to a numeric value."""
     return pd.to_numeric(value.replace(',', ''), errors='coerce')
@@ -27,7 +27,7 @@ original_categories = ["Automobiles", "Buses", "Truck"]
 new_order = ["Truck", "Buses", "Automobiles"]
 label_map = {"Truck": "TRUCK", "Buses": "BUS", "Automobiles": "AUTO"}
 
-# --- Process 2024 Data ---
+# Process 2024 Data
 df2024_raw = pd.read_csv("traffic_2024.csv", header=None)
 df2024_raw.columns = df2024_raw.iloc[1]   # Header row is index=1 for 2024
 df2024_clean = df2024_raw.drop([0, 1]).reset_index(drop=True)
@@ -43,7 +43,7 @@ for cat in original_categories:
 df2024_final = pd.concat(data_2024, ignore_index=True)
 df2024_final.rename(columns={'Jan_numeric': 'Jan_2024'}, inplace=True)
 
-# --- Process 2025 Data ---
+# Process 2025 Data
 df2025_raw = pd.read_csv("traffic_2025.csv", header=None)
 df2025_raw.columns = df2025_raw.iloc[2]   # Header row is index=2 for 2025
 df2025_clean = df2025_raw.drop([0, 1, 2]).reset_index(drop=True)
@@ -59,7 +59,7 @@ for cat in original_categories:
 df2025_final = pd.concat(data_2025, ignore_index=True)
 df2025_final.rename(columns={'Jan_numeric': 'Jan_2025'}, inplace=True)
 
-# --- Merge & Compute Differences ---
+# Merge & Compute Differences
 df2024_comp = df2024_final[['Crossing', 'Vehicle', 'Jan_2024']]
 df2025_comp = df2025_final[['Crossing', 'Vehicle', 'Jan_2025']]
 df_compare = pd.merge(df2024_comp, df2025_comp, on=['Crossing', 'Vehicle'])
@@ -69,7 +69,7 @@ df_compare['Percent_Change'] = (df_compare['Difference'] / df_compare['Jan_2024'
 print("Merged Comparison Data:")
 print(df_compare)
 
-# ======================= Pie Charts =======================
+# Pie Charts
 pie2024 = df2024_final.groupby('Vehicle')['Jan_2024'].sum()
 pie2025 = df2025_final.groupby('Vehicle')['Jan_2025'].sum()
 
@@ -82,7 +82,7 @@ axs[1].set_title('Vehicle Distribution - January 2025\n(Staten Island Crossings)
 plt.tight_layout()
 plt.show()
 
-# ======================= Overall Percentage Change Bar Chart (Real Totals) =======================
+# Overall Percentage Change Bar Chart (Real Totals)
 df_total = df_compare.groupby('Vehicle').agg({'Jan_2024': 'sum', 'Jan_2025': 'sum'}).reset_index()
 df_total['Real_Percent_Change'] = ((df_total['Jan_2025'] - df_total['Jan_2024']) / df_total['Jan_2024']) * 100
 df_total = df_total.set_index('Vehicle').reindex(new_order).reset_index()
@@ -102,7 +102,7 @@ for bar in bars:
 plt.tight_layout()
 plt.show()
 
-# ======================= Horizontal Bar Charts per Crossing (Percentage Change) =======================
+# Horizontal Bar Charts per Crossing (Percentage Change)
 # New label function: center labels inside the bars in white bold text.
 def label_bar_center(ax, x_val, y_val, text):
     # Compute center of the bar: if x_val is 0, use 0; otherwise, halfway between 0 and x_val.
@@ -148,7 +148,7 @@ plt.suptitle("Horizontal Bar Charts of % Change (Jan 2024 vs. Jan 2025) by Cross
 plt.tight_layout(rect=[0, 0, 1, 0.95])
 plt.show()
 
-# ======================= Diverging Bar Chart (All Records) =======================
+# Diverging Bar Chart (All Records)
 df_compare['Label'] = df_compare['Crossing'] + " (" + df_compare['Vehicle'] + ")"
 df_diverge = df_compare.sort_values(by='Percent_Change')
 
@@ -165,7 +165,7 @@ for i, v in enumerate(df_diverge['Percent_Change']):
 plt.tight_layout()
 plt.show()
 
-# ======================= Interactive Map (Detailed Breakdown) =======================
+# Interactive Map (Detailed Breakdown)
 map_data = {}
 for cr in crossing_order:
     df_cr = df_compare[df_compare['Crossing'] == cr]
