@@ -194,3 +194,32 @@ for cr in crossing_order:
     ).add_to(m)
 m.save("SI_Vehicle_Breakdown_Map.html")
 print("\nInteractive map saved as SI_Vehicle_Breakdown_Map.html")
+
+Merged Comparison Data:
+               Crossing      Vehicle  Jan_2024  Jan_2025  Difference  \
+0       Goethals Bridge  Automobiles   1226564   1268239       41675   
+1  Outerbridge Crossing  Automobiles   1046228   1058262       12034   
+2        Bayonne Bridge  Automobiles    273106    278319        5213   
+3       Goethals Bridge        Buses      8541      9116         575   
+4  Outerbridge Crossing        Buses      1528      1337        -191   
+5        Bayonne Bridge        Buses      1411      1723         312   
+6       Goethals Bridge        Truck    124914    143404       18490   
+7  Outerbridge Crossing        Truck     55291     53546       -1745   
+8        Bayonne Bridge        Truck     17091     18565        1474   
+
+   Percent_Change  
+0        3.397703  
+1        1.150227  
+2        1.908783  
+3        6.732233  
+4      -12.500000  
+5       22.111977  
+6       14.802184  
+7       -3.156029  
+8        8.624422  
+
+![image](https://github.com/user-attachments/assets/01c90d4b-1035-4a9b-acb5-2b83c0c94b77)
+![image](https://github.com/user-attachments/assets/500e4e08-b038-4146-a601-fffa0a3d6625)
+![image](https://github.com/user-attachments/assets/a130a68a-4d38-4da4-9b1b-cf4155da21c2)
+![image](https://github.com/user-attachments/assets/4eb1700d-69fe-4be6-a0c0-2faf1a118c80)
+![image](https://github.com/user-attachments/assets/7c7c2e46-5d63-490a-b3f5-c5919dfd0ec8)
