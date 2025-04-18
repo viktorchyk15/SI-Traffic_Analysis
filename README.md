@@ -69,6 +69,8 @@ df_compare['Percent_Change'] = (df_compare['Difference'] / df_compare['Jan_2024'
 print("Merged Comparison Data:")
 print(df_compare)
 
+![image](https://github.com/user-attachments/assets/e9c0d553-0511-4abb-8f53-91b4d876b2a7)
+
 # Pie Charts
 pie2024 = df2024_final.groupby('Vehicle')['Jan_2024'].sum()
 pie2025 = df2025_final.groupby('Vehicle')['Jan_2025'].sum()
@@ -81,6 +83,8 @@ axs[1].pie(pie2025, labels=pie2025.index, autopct='%1.1f%%', startangle=90, colo
 axs[1].set_title('Vehicle Distribution - January 2025\n(Staten Island Crossings)', fontsize=14)
 plt.tight_layout()
 plt.show()
+
+![image](https://github.com/user-attachments/assets/01c90d4b-1035-4a9b-acb5-2b83c0c94b77)
 
 # Overall Percentage Change Bar Chart (Real Totals)
 df_total = df_compare.groupby('Vehicle').agg({'Jan_2024': 'sum', 'Jan_2025': 'sum'}).reset_index()
@@ -101,6 +105,8 @@ for bar in bars:
             f"{height:.1f}%", ha='center', va='bottom', fontsize=10, fontweight='bold', color='black')
 plt.tight_layout()
 plt.show()
+
+![image](https://github.com/user-attachments/assets/500e4e08-b038-4146-a601-fffa0a3d6625)
 
 # Horizontal Bar Charts per Crossing (Percentage Change)
 # New label function: center labels inside the bars in white bold text.
@@ -148,6 +154,8 @@ plt.suptitle("Horizontal Bar Charts of % Change (Jan 2024 vs. Jan 2025) by Cross
 plt.tight_layout(rect=[0, 0, 1, 0.95])
 plt.show()
 
+![image](https://github.com/user-attachments/assets/a130a68a-4d38-4da4-9b1b-cf4155da21c2)
+
 # Diverging Bar Chart (All Records)
 df_compare['Label'] = df_compare['Crossing'] + " (" + df_compare['Vehicle'] + ")"
 df_diverge = df_compare.sort_values(by='Percent_Change')
@@ -164,6 +172,8 @@ for i, v in enumerate(df_diverge['Percent_Change']):
     ax.text(v + offset, i, f"{v:.1f}%", color='black', va='center', fontweight='bold')
 plt.tight_layout()
 plt.show()
+
+![image](https://github.com/user-attachments/assets/4eb1700d-69fe-4be6-a0c0-2faf1a118c80) 
 
 # Interactive Map (Detailed Breakdown)
 map_data = {}
@@ -195,6 +205,12 @@ for cr in crossing_order:
 m.save("SI_Vehicle_Breakdown_Map.html")
 print("\nInteractive map saved as SI_Vehicle_Breakdown_Map.html")
 
+![image](https://github.com/user-attachments/assets/7c7c2e46-5d63-490a-b3f5-c5919dfd0ec8)
+![Screenshot 2025-04-16 184550](https://github.com/user-attachments/assets/ddc4dfad-b93a-4b78-bcf8-a20618403f7e)
+![Screenshot 2025-04-16 184533](https://github.com/user-attachments/assets/0deb4b33-066e-4076-ad77-c9c01baac75b)
+
+
+
 Merged Comparison Data:
                Crossing      Vehicle  Jan_2024  Jan_2025  Difference  \
 0       Goethals Bridge  Automobiles   1226564   1268239       41675   
@@ -218,8 +234,3 @@ Merged Comparison Data:
 7       -3.156029  
 8        8.624422  
 
-![image](https://github.com/user-attachments/assets/01c90d4b-1035-4a9b-acb5-2b83c0c94b77)
-![image](https://github.com/user-attachments/assets/500e4e08-b038-4146-a601-fffa0a3d6625)
-![image](https://github.com/user-attachments/assets/a130a68a-4d38-4da4-9b1b-cf4155da21c2)
-![image](https://github.com/user-attachments/assets/4eb1700d-69fe-4be6-a0c0-2faf1a118c80)
-![image](https://github.com/user-attachments/assets/7c7c2e46-5d63-490a-b3f5-c5919dfd0ec8)
